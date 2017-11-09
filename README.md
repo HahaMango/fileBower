@@ -5,6 +5,12 @@
 
 我个人因为也遇到这样的问题所以想写一个提高工作效率的小工具。
 
+代码已经开源欢迎大家查看，或者添加新的功能。
+
+![image1](https://github.com/HahaMango/fileBower/blob/master/fileBower/img/1.JPG)
+![image2](https://github.com/HahaMango/fileBower/blob/master/fileBower/img/2.JPG)
+![image3](https://github.com/HahaMango/fileBower/blob/master/fileBower/img/3.JPG)
+
 ***
 开发环境VS2017+WPF。
 
