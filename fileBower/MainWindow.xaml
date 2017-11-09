@@ -1,0 +1,42 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:fileBower"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="fileBower.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="452.257" Width="260" WindowStyle="None" AllowsTransparency="True" Loaded="win_loaded" Closing="win_closing">
+    <!--
+    
+    <Window.Resources>
+        <ObjectDataProvider x:Key="books" ObjectType="{x:Type local:getFileName}" MethodName="GetF"/>
+    </Window.Resources>
+-->
+    <Grid Background="#FF1B1B1B" >
+        <Grid Margin="10,48,0,0" Height="371" VerticalAlignment="Top" HorizontalAlignment="Left" Width="240" Name="grid1">
+            <ListBox x:Name="listbox1" Background="#FF292929" BorderBrush="{x:Null}" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" Width="220" Height="45">
+                            <TextBlock Text="{Binding FileNameLastName}"  Height="30" Width="auto" FontSize="18"/>
+                            <TextBlock Text="{Binding Filename}" Width="auto" FontSize="9"/>
+                            <Button Content="删除"  Width="40" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,-30,0,0" Click="deClick" Foreground="{x:Null}" BorderBrush="{x:Null}" 
+                                    Style="{StaticResource MyButton}">
+                                <Button.Background>
+                                    <ImageBrush Stretch="Uniform" ImageSource="img\close.png"/>
+                                </Button.Background>
+                            </Button>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+        <Button Content="选择文件夹" HorizontalAlignment="Left" Margin="173,424,0,0" VerticalAlignment="Top" Width="77" Height="23" Click="Click1" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}"
+                Style="{StaticResource MyButton}"/>
+        <Button Content="关闭" HorizontalAlignment="Left" Margin="202,10,0,0" VerticalAlignment="Top" Width="48" Height="23" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}" Click="closeclick"
+                Style="{StaticResource MyButton}"/>
+        <Button Content="打开资源管理器" HorizontalAlignment="Left" Margin="10,424,0,0" VerticalAlignment="Top" Width="102" Height="23" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="Button_Click"
+                Style="{StaticResource MyButton}"/>
+    </Grid>
+</Window>
