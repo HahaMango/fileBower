@@ -58,6 +58,10 @@
     </ApplicationDefinition>
     <Compile Include="newLab.cs" />
     <Compile Include="winHide.cs" />
+    <Page Include="FileBoxStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

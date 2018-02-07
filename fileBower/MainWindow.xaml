@@ -6,7 +6,21 @@
         xmlns:local="clr-namespace:fileBower"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="fileBower.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="452.257" Width="260" WindowStyle="None" AllowsTransparency="True" Loaded="win_loaded" Closing="win_closing">
+        Title="MainWindow" Height="452.257" Width="260" WindowStyle="None" AllowsTransparency="True" Loaded="Win_loaded" Closing="Win_closing">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="FileBoxStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <ControlTemplate x:Key="FileBox" TargetType="{x:Type ListBox}">
+                <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="1" SnapsToDevicePixels="True">
+                    <ScrollViewer Focusable="False" Padding="{TemplateBinding Padding}" Template="{StaticResource ScrollViewerControlTemplate1}">
+                        <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                    </ScrollViewer>
+                </Border>
+            </ControlTemplate>
+        </ResourceDictionary>
+    </Window.Resources>
     <!--
     
     <Window.Resources>
@@ -15,13 +29,13 @@
 -->
     <Grid Background="#FF1B1B1B" >
         <Grid Margin="10,48,0,0" Height="371" VerticalAlignment="Top" HorizontalAlignment="Left" Width="240" Name="grid1">
-            <ListBox x:Name="listbox1" Background="#FF292929" BorderBrush="{x:Null}" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+            <ListBox x:Name="listbox1" Background="#FF292929" BorderBrush="{x:Null}" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Template="{DynamicResource FileBox}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" Width="220" Height="45">
                             <TextBlock Text="{Binding FileNameLastName}"  Height="30" Width="auto" FontSize="18"/>
                             <TextBlock Text="{Binding Filename}" Width="auto" FontSize="9"/>
-                            <Button Content="删除"  Width="40" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,-30,0,0" Click="deClick" Foreground="{x:Null}" BorderBrush="{x:Null}" 
+                            <Button Content="删除"  Width="40" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,-30,0,0" Click="DeClick" Foreground="{x:Null}" BorderBrush="{x:Null}" 
                                     Style="{StaticResource MyButton}">
                                 <Button.Background>
                                     <ImageBrush Stretch="Uniform" ImageSource="img\close.png"/>
@@ -34,7 +48,7 @@
         </Grid>
         <Button Content="选择文件夹" HorizontalAlignment="Left" Margin="173,424,0,0" VerticalAlignment="Top" Width="77" Height="23" Click="Click1" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}"
                 Style="{StaticResource MyButton}"/>
-        <Button Content="关闭" HorizontalAlignment="Left" Margin="202,10,0,0" VerticalAlignment="Top" Width="48" Height="23" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}" Click="closeclick"
+        <Button Content="关闭" HorizontalAlignment="Left" Margin="202,10,0,0" VerticalAlignment="Top" Width="48" Height="23" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}" Click="Closeclick"
                 Style="{StaticResource MyButton}"/>
         <Button Content="打开资源管理器" HorizontalAlignment="Left" Margin="10,424,0,0" VerticalAlignment="Top" Width="102" Height="23" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="Button_Click"
                 Style="{StaticResource MyButton}"/>

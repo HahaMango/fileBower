@@ -22,7 +22,7 @@ namespace fileBower
         { 
             InitializeComponent();
 
-            proCount();
+            ProCount();
 
             ShowInTaskbar = false;
             this.Topmost = true;
@@ -70,17 +70,17 @@ namespace fileBower
         {
             StackPanel sp = (StackPanel)sender;
             TextBlock tb = (TextBlock)sp.Children[1];
-            System.Diagnostics.Process.Start("Explorer",tb.Text);
+            Process.Start("Explorer",tb.Text);
         }
 
         //点击关闭按钮事件
-        private void closeclick(object sender, RoutedEventArgs e)
+        private void Closeclick(object sender, RoutedEventArgs e)
         {
             System.Windows.Application.Current.Shutdown();
         }
 
         //加载窗体事件
-        private void win_loaded(object sender, RoutedEventArgs e)
+        private void Win_loaded(object sender, RoutedEventArgs e)
         {
 
             FileStream fs = null;
@@ -104,7 +104,7 @@ namespace fileBower
         }
 
         //窗体关闭事件
-        private void win_closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Win_closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             FileStream fs = new FileStream("C.dat", FileMode.Create);
             BinaryFormatter bf = new BinaryFormatter();
@@ -135,7 +135,7 @@ namespace fileBower
 
 
         //每个列表相的删除按钮事件
-        private void deClick(object sender, RoutedEventArgs e)
+        private void DeClick(object sender, RoutedEventArgs e)
         {
             System.Windows.Controls.Button button = (System.Windows.Controls.Button)sender;
             StackPanel panel = (StackPanel)button.Parent;
@@ -152,7 +152,7 @@ namespace fileBower
         }
 
         //防止两次启动
-        private void proCount()
+        private void ProCount()
         {
             int count = 0;
             //检测进程是否存在

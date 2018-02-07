@@ -26,3 +26,4 @@ D:\Work\C#Work\fileBower\fileBower\obj\Release\fileBower.csproj.CoreCompileInput
 D:\Work\C#Work\fileBower\fileBower\obj\Release\fileBower.exe
 D:\Work\C#Work\fileBower\fileBower\obj\Release\fileBower.pdb
 D:\Work\C#Work\fileBower\fileBower\obj\Release\App.baml
+D:\Work\C#Work\fileBower\fileBower\obj\Release\FileBoxStyle.baml
