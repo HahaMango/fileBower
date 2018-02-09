@@ -6,12 +6,13 @@ using System.Windows.Controls;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Windows.Media;
 
 namespace fileBower
 {
     [Serializable]
-    public  class getFileName
-    {
+    public  class FileList
+    {     
         private double left = 0;
         private double top = 0;
         private  ObservableCollection<FileName> fileName = new ObservableCollection<FileName>();
@@ -21,10 +22,11 @@ namespace fileBower
             fileName.Add(new FileName(filename, filenameLastName));
         }
         //获取FileName数组
-        public  ObservableCollection<FileName> GetF()
+        public  ObservableCollection<FileName> GetList()
         {
             return fileName;
         }
+
         //获取或设置left
         public double Left
         {
@@ -91,4 +93,54 @@ namespace fileBower
     }
 
 
+    public class Visibilable : INotifyPropertyChanged
+    {
+        private string vi = "Hidden";
+        private string stackState = "True";
+        private string color = "white";
+
+        public string Vi
+        {
+            get
+            {
+                return vi;
+            }
+            set
+            {
+                vi = value;
+                if (this.PropertyChanged != null)                
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Vi"));                
+            }
+        }
+
+        public string StackState
+        {
+            get
+            {
+                return stackState;
+            }
+            set
+            {
+                stackState = value;
+                if (this.PropertyChanged != null)
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("StackState"));
+            }
+        }
+
+        public string ItemColor
+        {
+            get
+            {
+                return color;
+            }
+            set
+            {
+                color = value;
+                if (this.PropertyChanged != null)
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("ItemColor"));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
 }

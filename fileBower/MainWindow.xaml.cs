@@ -1,5 +1,4 @@
-﻿
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Forms;
@@ -8,6 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.ComponentModel;
 
 namespace fileBower
 {
@@ -16,13 +16,15 @@ namespace fileBower
     /// </summary>
     public partial class MainWindow : Window
     {
-        getFileName gf;
+        FileList gf;
         Collection<FileName> buffList = null;
+        Visibilable visibilable;
         public MainWindow()
-        { 
+        {
             InitializeComponent();
 
             ProCount();
+            visibilable = (Visibilable)this.FindResource("visi");
 
             ShowInTaskbar = false;
             this.Topmost = true;
@@ -31,13 +33,11 @@ namespace fileBower
             wh.start();
             this.MouseLeftButtonDown += MainWindow_MouseLeftButtonDown;
 
-            gf = new getFileName();
+            gf = new FileList();
 
-            buffList = gf.GetF();
+            buffList = gf.GetList();
             listbox1.ItemsSource = buffList;
-
-
-         }
+        }
 
         //鼠标按住上方拖动事件
         private void MainWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -56,12 +56,12 @@ namespace fileBower
         //点击文件夹按钮的事件
         private void Click1(object sender, RoutedEventArgs e)
         {
-            
+
             FolderBrowserDialog fd = new FolderBrowserDialog();
             if (fd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 string[] s = fd.SelectedPath.Split('\\');
-                gf.setFile(fd.SelectedPath, s[s.Length-1]);
+                gf.setFile(fd.SelectedPath, s[s.Length - 1]);
             }
         }
 
@@ -70,7 +70,7 @@ namespace fileBower
         {
             StackPanel sp = (StackPanel)sender;
             TextBlock tb = (TextBlock)sp.Children[1];
-            Process.Start("Explorer",tb.Text);
+            Process.Start("Explorer", tb.Text);
         }
 
         //点击关闭按钮事件
@@ -88,7 +88,7 @@ namespace fileBower
             {
                 fs = new FileStream("C.dat", FileMode.Open);
                 BinaryFormatter bf = new BinaryFormatter();
-                gf = (getFileName)bf.Deserialize(fs);
+                gf = (FileList)bf.Deserialize(fs);
                 fs.Close();
             }
             catch
@@ -96,7 +96,7 @@ namespace fileBower
             }
             finally
             {
-                buffList = gf.GetF();
+                buffList = gf.GetList();
                 listbox1.ItemsSource = buffList;
             }
             this.Left = gf.Left;
@@ -113,7 +113,8 @@ namespace fileBower
             try
             {
                 bf.Serialize(fs, gf);
-            }catch
+            }
+            catch
             {
                 System.Windows.MessageBox.Show("序列化失败");
                 throw;
@@ -138,9 +139,10 @@ namespace fileBower
         private void DeClick(object sender, RoutedEventArgs e)
         {
             System.Windows.Controls.Button button = (System.Windows.Controls.Button)sender;
-            StackPanel panel = (StackPanel)button.Parent;
-            TextBlock block = (TextBlock)panel.Children[1];
-            string filename = block.Text;
+            Grid panel = (Grid)button.Parent;
+            StackPanel stackPanel = (StackPanel)panel.Children[0];
+            TextBlock textBlock = (TextBlock)stackPanel.Children[1];
+            string filename = textBlock.Text;
             foreach (FileName file in buffList)
             {
                 if (file.Filename == filename)
@@ -170,6 +172,22 @@ namespace fileBower
             {
                 processKill.Kill();
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (visibilable.Vi == "Visible")
+            {
+                visibilable.Vi = "Hidden";
+                visibilable.StackState = "true";
+                visibilable.ItemColor = "white";
+            }
+            else
+            {
+                visibilable.Vi = "Visible";
+                visibilable.StackState = "false";
+                visibilable.ItemColor = "gray";
+            }                
         }
     }
 }
