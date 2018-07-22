@@ -14,7 +14,6 @@ D:\Work\WPFwork\fileBower\fileBower\obj\Debug\fileBower.pdb
 D:\Work\WPFwork\fileBower\fileBower\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\Work\C#Work\fileBower\fileBower\bin\Debug\fileBower.exe
 D:\Work\C#Work\fileBower\fileBower\bin\Debug\fileBower.pdb
-D:\Work\C#Work\fileBower\fileBower\obj\Debug\fileBower.csprojResolveAssemblyReference.cache
 D:\Work\C#Work\fileBower\fileBower\obj\Debug\MainWindow.g.cs
 D:\Work\C#Work\fileBower\fileBower\obj\Debug\App.g.cs
 D:\Work\C#Work\fileBower\fileBower\obj\Debug\fileBower_MarkupCompile.cache
@@ -29,3 +28,6 @@ D:\Work\C#Work\fileBower\fileBower\obj\Debug\fileBower.pdb
 D:\Work\C#Work\fileBower\fileBower\obj\Debug\App.baml
 D:\Work\C#Work\fileBower\fileBower\obj\Debug\FileBoxStyle.baml
 D:\Work\C#Work\fileBower\fileBower\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Work\C#Work\fileBower\fileBower\obj\Debug\fileBower.csprojAssemblyReference.cache
+D:\Work\C#Work\fileBower\fileBower\obj\Debug\addsite.g.cs
+D:\Work\C#Work\fileBower\fileBower\obj\Debug\addsite.baml

@@ -17,14 +17,16 @@ namespace fileBower
     public partial class MainWindow : Window
     {
         FileList gf;
+        WebList wl;
         Collection<FileName> buffList = null;
+        Collection<Website> webbufflist = null;
         Visibilable visibilable;
         public MainWindow()
         {
-            InitializeComponent();
-
+            InitializeComponent();        
+            
             ProCount();
-            visibilable = (Visibilable)this.FindResource("visi");
+            visibilable = (Visibilable)this.FindResource("visi");          
 
             ShowInTaskbar = false;
             this.Topmost = true;
@@ -34,9 +36,13 @@ namespace fileBower
             this.MouseLeftButtonDown += MainWindow_MouseLeftButtonDown;
 
             gf = new FileList();
+            wl = new WebList();
 
             buffList = gf.GetList();
+            webbufflist = wl.getWeblist();
             listbox1.ItemsSource = buffList;
+
+            listboxWeb.ItemsSource = webbufflist;
         }
 
         //鼠标按住上方拖动事件
@@ -56,21 +62,35 @@ namespace fileBower
         //点击文件夹按钮的事件
         private void Click1(object sender, RoutedEventArgs e)
         {
-
-            FolderBrowserDialog fd = new FolderBrowserDialog();
-            if (fd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (selectButton.Content.ToString() == "选择文件夹")
             {
-                string[] s = fd.SelectedPath.Split('\\');
-                gf.setFile(fd.SelectedPath, s[s.Length - 1]);
+                FolderBrowserDialog fd = new FolderBrowserDialog();
+                if (fd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    string[] s = fd.SelectedPath.Split('\\');
+                    gf.setFile(fd.SelectedPath, s[s.Length - 1]);
+                }
+            }
+            if (selectButton.Content.ToString() == "添加网址")
+            {
+                webframe.Visibility = Visibility.Visible;
             }
         }
 
         //点击listbox里面的元素的事件
         private void StackPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            StackPanel sp = (StackPanel)sender;
-            TextBlock tb = (TextBlock)sp.Children[1];
-            Process.Start("Explorer", tb.Text);
+            if (switchbutton.IsChecked == false)
+            {
+                StackPanel sp = (StackPanel)sender;
+                TextBlock tb = (TextBlock)sp.Children[1];
+                Process.Start("Explorer", tb.Text);
+            }else if(switchbutton.IsChecked == true)
+            {
+                StackPanel sp = (StackPanel)sender;
+                TextBlock tb = (TextBlock)sp.Children[1];
+                Process.Start(tb.Text);
+            }
         }
 
         //点击关闭按钮事件
@@ -84,12 +104,17 @@ namespace fileBower
         {
 
             FileStream fs = null;
+            FileStream webfile = null;
             try
             {
                 fs = new FileStream("C.dat", FileMode.Open);
+                webfile = new FileStream("W.dat", FileMode.Open);
                 BinaryFormatter bf = new BinaryFormatter();
+                BinaryFormatter wbf = new BinaryFormatter();
                 gf = (FileList)bf.Deserialize(fs);
+                wl = (WebList)wbf.Deserialize(webfile);
                 fs.Close();
+                webfile.Close();
             }
             catch
             {
@@ -98,6 +123,11 @@ namespace fileBower
             {
                 buffList = gf.GetList();
                 listbox1.ItemsSource = buffList;
+
+                webbufflist = wl.getWeblist();
+                listboxWeb.ItemsSource = webbufflist;
+
+                webframe.Content = new addsite(webframe, wl);
             }
             this.Left = gf.Left;
             this.Top = gf.Top;
@@ -106,13 +136,20 @@ namespace fileBower
         //窗体关闭事件
         private void Win_closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            //实例化文件数据
             FileStream fs = new FileStream("C.dat", FileMode.Create);
             BinaryFormatter bf = new BinaryFormatter();
             gf.Left = this.Left;
             gf.Top = this.Top;
+
+            //实例化网站数据
+            FileStream webfile = new FileStream("W.dat", FileMode.Create);
+            BinaryFormatter wbf = new BinaryFormatter();
+
             try
             {
                 bf.Serialize(fs, gf);
+                wbf.Serialize(webfile, wl);
             }
             catch
             {
@@ -122,6 +159,7 @@ namespace fileBower
             finally
             {
                 fs.Close();
+                webfile.Close();
             }
 
 
@@ -142,13 +180,27 @@ namespace fileBower
             Grid panel = (Grid)button.Parent;
             StackPanel stackPanel = (StackPanel)panel.Children[0];
             TextBlock textBlock = (TextBlock)stackPanel.Children[1];
-            string filename = textBlock.Text;
-            foreach (FileName file in buffList)
+            if (switchbutton.IsChecked == false)
             {
-                if (file.Filename == filename)
+                string filename = textBlock.Text;
+                foreach (FileName file in buffList)
                 {
-                    buffList.Remove(file);
-                    break;
+                    if (file.Filename == filename)
+                    {
+                        buffList.Remove(file);
+                        break;
+                    }
+                }
+            }else if(switchbutton.IsChecked == true)
+            {
+                string webaddr = textBlock.Text;
+                foreach (Website website in webbufflist)
+                {
+                    if(website.Webaddr == webaddr)
+                    {
+                        webbufflist.Remove(website);
+                        break;
+                    }
                 }
             }
         }
@@ -159,7 +211,7 @@ namespace fileBower
             int count = 0;
             //检测进程是否存在
             Process[] processList = Process.GetProcesses();
-            Process processKill = null;
+            Process processKill = null;           
             foreach (Process process in processList)
             {
                 if (process.ProcessName == "fileBower")
@@ -188,6 +240,18 @@ namespace fileBower
                 visibilable.StackState = "false";
                 visibilable.ItemColor = "gray";
             }                
+        }
+
+        private void switchbutton_Click(object sender, RoutedEventArgs e)
+        {
+            if(switchbutton.IsChecked == true)
+            {
+                selectButton.Content = "添加网址";
+            }
+            else
+            {
+                selectButton.Content = "选择文件夹";
+            }
         }
     }
 }

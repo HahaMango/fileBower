@@ -92,6 +92,58 @@ namespace fileBower
 
     }
 
+    [Serializable]
+    public class WebList
+    {
+        private ObservableCollection<Website> weblist = new ObservableCollection<Website>();
+
+        public void saveWeb(string webname,string webaddr)
+        {
+            weblist.Add(new Website(webname, webaddr));
+        }
+
+        public ObservableCollection<Website> getWeblist()
+        {
+            return weblist;
+        }
+    }
+
+    [Serializable]
+    public class Website
+    {
+        private string webName;
+        private string webaddr;
+
+        public Website(string webname,string webaddr)
+        {
+            this.webName = webname;
+            this.webaddr = webaddr;
+        }
+
+        public string WebName
+        {
+            get
+            {
+                return this.webName;
+            }
+            set
+            {
+                this.webName = value;
+            }
+        }             
+
+        public string Webaddr
+        {
+            get
+            {
+                return this.webaddr;
+            }
+            set
+            {
+                this.webaddr = value;
+            }
+        }
+    }
 
     public class Visibilable : INotifyPropertyChanged
     {

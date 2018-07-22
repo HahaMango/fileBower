@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:fileBower"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="fileBower.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="452.257" Width="260" WindowStyle="None" AllowsTransparency="True" Loaded="Win_loaded" Closing="Win_closing">
+        Title="MainWindow" Height="452.257" Width="271.1" WindowStyle="None" AllowsTransparency="True" Loaded="Win_loaded" Closing="Win_closing" Background="{x:Null}">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -20,41 +20,97 @@
                 </Border>
             </ControlTemplate>
             <local:Visibilable x:Key="visi"/>
+            <Storyboard x:Key="switchin">
+                <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="listboxWeb">
+                    <EasingThicknessKeyFrame KeyTime="0" Value="-270,0,0,0"/>
+                    <EasingThicknessKeyFrame KeyTime="0:0:0.56" Value="-20,0,0,0"/>
+                    <EasingThicknessKeyFrame KeyTime="0:0:0.7" Value="0"/>
+                </ThicknessAnimationUsingKeyFrames>
+                <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="listbox1">
+                    <EasingThicknessKeyFrame KeyTime="0" Value="0"/>
+                    <EasingThicknessKeyFrame KeyTime="0:0:0.56" Value="250,0,0,0"/>
+                    <EasingThicknessKeyFrame KeyTime="0:0:0.7" Value="270,0,0,0"/>
+                </ThicknessAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="switchout">
+                <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="listbox1">
+                    <EasingThicknessKeyFrame KeyTime="0" Value="270,0,0,0"/>
+                    <EasingThicknessKeyFrame KeyTime="0:0:0.6" Value="20,0,0,0"/>
+                    <EasingThicknessKeyFrame KeyTime="0:0:0.7" Value="0"/>
+                </ThicknessAnimationUsingKeyFrames>
+                <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="listboxWeb">
+                    <EasingThicknessKeyFrame KeyTime="0" Value="0"/>
+                    <EasingThicknessKeyFrame KeyTime="0:0:0.6" Value="-250,0,0,0"/>
+                    <EasingThicknessKeyFrame KeyTime="0:0:0.7" Value="-270,0,0,0"/>
+                </ThicknessAnimationUsingKeyFrames>
+            </Storyboard>
         </ResourceDictionary>
     </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="ToggleButton.Checked" SourceName="switchbutton">
+            <BeginStoryboard x:Name="switchin_BeginStoryboard" Storyboard="{StaticResource switchin}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ToggleButton.Unchecked" SourceName="switchbutton">
+            <BeginStoryboard x:Name="switchout_BeginStoryboard" Storyboard="{StaticResource switchout}"/>
+        </EventTrigger>
+    </Window.Triggers>
     <!--
     
     <Window.Resources>
         <ObjectDataProvider x:Key="books" ObjectType="{x:Type local:getFileName}" MethodName="GetF"/>
     </Window.Resources>
 -->
-    <Grid Background="#FF1B1B1B" x:Name="grid2">
-        <Grid Margin="10,48,0,0" Height="371" VerticalAlignment="Top" HorizontalAlignment="Left" Width="240" Name="grid1">
-            <ListBox x:Name="listbox1" Background="#FF292929" BorderBrush="{x:Null}" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Template="{StaticResource FileBox}" >
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <StackPanel MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" Width="220" Height="45" IsEnabled="{Binding Source={StaticResource visi},Path=StackState}">
-                                <TextBlock Text="{Binding FileNameLastName}"  Height="30" Width="auto" FontSize="18" Foreground="{Binding Source={StaticResource visi},Path=ItemColor}"/>
-                                <TextBlock Text="{Binding Filename}" Width="auto" FontSize="9" Foreground="{Binding Source={StaticResource visi},Path=ItemColor}"/>
-                            </StackPanel>
-                            <Button Content="删除"  Width="40" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Click="DeClick" Foreground="{x:Null}" BorderBrush="{x:Null}" 
+    <Grid>
+        <Grid Background="#FF1B1B1B" x:Name="grid2" Margin="0,0,10,0">
+            <Grid Margin="10,48,0,0" Height="371" VerticalAlignment="Top" HorizontalAlignment="Left" Width="240" Name="grid1">
+                <ListBox x:Name="listbox1" Background="#FF292929" BorderBrush="{x:Null}" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Template="{StaticResource FileBox}" HorizontalAlignment="Left" Width="240" >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <StackPanel MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" Width="220" Height="45" IsEnabled="{Binding Source={StaticResource visi},Path=StackState}">
+                                    <TextBlock Text="{Binding FileNameLastName}"  Height="30" Width="auto" FontSize="18" Foreground="{Binding Source={StaticResource visi},Path=ItemColor}"/>
+                                    <TextBlock Text="{Binding Filename}" Width="auto" FontSize="9" Foreground="{Binding Source={StaticResource visi},Path=ItemColor}"/>
+                                </StackPanel>
+                                <Button Content="删除"  Width="40" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Click="DeClick" Foreground="{x:Null}" BorderBrush="{x:Null}" 
                                     Style="{StaticResource MyButton}" Visibility="{Binding Source={StaticResource visi},Path=Vi}" Margin="180,0,0,0">
-                                <Button.Background>
-                                    <ImageBrush Stretch="Uniform" ImageSource="img\close.png"/>
-                                </Button.Background>
-                            </Button>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                                    <Button.Background>
+                                        <ImageBrush Stretch="Uniform" ImageSource="img\close.png"/>
+                                    </Button.Background>
+                                </Button>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <ListBox x:Name="listboxWeb" Background="#FF292929" BorderBrush="{x:Null}" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Template="{StaticResource FileBox}" Margin="-270,0,0,0" HorizontalAlignment="Left" Width="240" >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <StackPanel MouseLeftButtonDown="StackPanel_MouseLeftButtonDown" Width="220" Height="45" IsEnabled="{Binding Source={StaticResource visi},Path=StackState}">
+                                    <TextBlock Text="{Binding WebName}"  Height="30" Width="auto" FontSize="18" Foreground="{Binding Source={StaticResource visi},Path=ItemColor}"/>
+                                    <TextBlock Text="{Binding Webaddr}" Width="auto" FontSize="9" Foreground="{Binding Source={StaticResource visi},Path=ItemColor}"/>
+                                </StackPanel>
+                                <Button Content="删除"  Width="40" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top" Click="DeClick" Foreground="{x:Null}" BorderBrush="{x:Null}" 
+                                    Style="{StaticResource MyButton}" Visibility="{Binding Source={StaticResource visi},Path=Vi}" Margin="180,0,0,0">
+                                    <Button.Background>
+                                        <ImageBrush Stretch="Uniform" ImageSource="img\close.png"/>
+                                    </Button.Background>
+                                </Button>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+            <Button Name="selectButton" Content="选择文件夹" HorizontalAlignment="Left" Margin="173,424,0,0" VerticalAlignment="Top" Width="77" Height="23" Click="Click1" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}"
+                Style="{StaticResource MyButton}"/>
+            <Button Content="关闭" HorizontalAlignment="Left" Margin="202,10,0,0" VerticalAlignment="Top" Width="48" Height="23" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}" Click="Closeclick"
+                Style="{StaticResource MyButton}"/>
+            <Button Content="打开资源管理器" HorizontalAlignment="Left" Margin="10,424,0,0" VerticalAlignment="Top" Width="102" Height="23" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="Button_Click"
+                Style="{StaticResource MyButton}"/>
+            <Button Content="编辑" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="46" Click="Button_Click_1" Style="{StaticResource MyButton}" Height="23" Foreground="White"/>
+            <Frame Name="webframe" Height="204" Width="auto" Visibility="Hidden"/>
         </Grid>
-        <Button Content="选择文件夹" HorizontalAlignment="Left" Margin="173,424,0,0" VerticalAlignment="Top" Width="77" Height="23" Click="Click1" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}"
-                Style="{StaticResource MyButton}"/>
-        <Button Content="关闭" HorizontalAlignment="Left" Margin="202,10,0,0" VerticalAlignment="Top" Width="48" Height="23" Foreground="White" BorderBrush="{x:Null}" Background="{x:Null}" Click="Closeclick"
-                Style="{StaticResource MyButton}"/>
-        <Button Content="打开资源管理器" HorizontalAlignment="Left" Margin="10,424,0,0" VerticalAlignment="Top" Width="102" Height="23" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" Click="Button_Click"
-                Style="{StaticResource MyButton}"/>
-        <Button Content="编辑" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="46" Click="Button_Click_1" Style="{StaticResource MyButton}" Height="23" Foreground="White"/>
+        <CheckBox Name="switchbutton" Content="" HorizontalAlignment="Left" Height="35" Margin="236.1,207.333,0,0" Style="{DynamicResource switchButton}" VerticalAlignment="Top" Width="35" Click="switchbutton_Click"/>
+
     </Grid>
 </Window>

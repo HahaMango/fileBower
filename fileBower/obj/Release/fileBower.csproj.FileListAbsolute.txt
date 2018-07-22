@@ -27,3 +27,6 @@ D:\Work\C#Work\fileBower\fileBower\obj\Release\fileBower.pdb
 D:\Work\C#Work\fileBower\fileBower\obj\Release\App.baml
 D:\Work\C#Work\fileBower\fileBower\obj\Release\FileBoxStyle.baml
 D:\Work\C#Work\fileBower\fileBower\obj\Release\GeneratedInternalTypeHelper.g.cs
+D:\Work\C#Work\fileBower\fileBower\obj\Release\fileBower.csprojAssemblyReference.cache
+D:\Work\C#Work\fileBower\fileBower\obj\Release\addsite.g.cs
+D:\Work\C#Work\fileBower\fileBower\obj\Release\addsite.baml

@@ -26,9 +26,7 @@ namespace fileBower
         {
             //throw new NotImplementedException();
             if(this.win.Left==0)
-                this.win.Left = -this.win.Width + 2;
-            if (this.win.Left == Sx - this.win.Width)
-                this.win.Left = Sx - 2;
+                this.win.Left = -this.win.Width + 13;
         }
 
         private void Win_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
@@ -36,8 +34,6 @@ namespace fileBower
             //throw new NotImplementedException();
             if(this.win.Left<0)
                 this.win.Left = 0;
-            if ((this.win.Left + this.win.Width) > Sx)
-                this.win.Left = Sx - this.win.Width;
         }
 
         private void Win_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -47,11 +43,7 @@ namespace fileBower
             //throw new NotImplementedException();
             if (left < 0)
             {
-                this.win.Left = -this.win.Width + 2;
-            }
-            if (right > Sx)
-            {
-                this.win.Left = Sx - 2;
+                this.win.Left = -this.win.Width + 13;
             }
         }
     }

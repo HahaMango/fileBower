@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Work\C#Work\fileBower\fileBower\obj\Release\
+D:\Work\C#Work\fileBower\fileBower\obj\Debug\
 fileBower
 none
 false
-TRACE
+DEBUG;TRACE
 D:\Work\C#Work\fileBower\fileBower\App.xaml
 3-504385950
 
-81171529084
+9-2001856862
 131071118929
 addsite.xaml;FileBoxStyle.xaml;MainWindow.xaml;
 
-False
+True
 
