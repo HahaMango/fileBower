@@ -26,32 +26,6 @@ namespace fileBower
         {
             return fileName;
         }
-
-        //获取或设置left
-        public double Left
-        {
-            get
-            {
-                return this.left;
-            }
-            set
-            {
-                this.left = value;
-            }
-        }
-
-        //获取或设置top
-        public double Top
-        {
-            get
-            {
-                return this.top;
-            }
-            set
-            {
-                this.top = value;
-            }
-        }
     }
 
     [Serializable]
@@ -141,6 +115,38 @@ namespace fileBower
             set
             {
                 this.webaddr = value;
+            }
+        }
+    }
+
+    //启动位置x,y值
+    [Serializable]
+    public class Position
+    {
+        private double _left;
+        private double _top;
+
+        public double Left
+        {
+            get
+            {
+                return this._left;
+            }
+            set
+            {
+                this._left = value;
+            }
+        }
+
+        public double Top 
+        {
+            get
+            {
+                return this._top;       
+            }
+            set
+            {
+                this._top = value;
             }
         }
     }

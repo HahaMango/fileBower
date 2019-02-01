@@ -36,6 +36,9 @@
     <ApplicationIcon>bitbug_favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BaseControl">
+      <HintPath>..\..\controlLibrary\BaseControl\BaseControl\bin\Debug\BaseControl.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />

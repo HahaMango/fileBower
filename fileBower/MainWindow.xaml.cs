@@ -105,16 +105,22 @@ namespace fileBower
 
             FileStream fs = null;
             FileStream webfile = null;
+            FileStream positionfile = null;
+            Position position = null;
             try
             {
                 fs = new FileStream("C.dat", FileMode.Open);
                 webfile = new FileStream("W.dat", FileMode.Open);
+                positionfile = new FileStream("P.dat", FileMode.Open);
                 BinaryFormatter bf = new BinaryFormatter();
                 BinaryFormatter wbf = new BinaryFormatter();
+                BinaryFormatter pbf = new BinaryFormatter();           
                 gf = (FileList)bf.Deserialize(fs);
                 wl = (WebList)wbf.Deserialize(webfile);
+                position = (Position)pbf.Deserialize(positionfile);                       
                 fs.Close();
                 webfile.Close();
+                positionfile.Close();
             }
             catch
             {
@@ -129,27 +135,38 @@ namespace fileBower
 
                 webframe.Content = new addsite(webframe, wl);
             }
-            this.Left = gf.Left;
-            this.Top = gf.Top;
+            if(position == null)
+            {
+                return;
+            }
+            this.Left = position.Left;
+            this.Top = position.Top;
         }
 
         //窗体关闭事件
         private void Win_closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //实例化文件数据
+            //序列化文件数据
             FileStream fs = new FileStream("C.dat", FileMode.Create);
             BinaryFormatter bf = new BinaryFormatter();
-            gf.Left = this.Left;
-            gf.Top = this.Top;
 
-            //实例化网站数据
+            //序列化网站数据
             FileStream webfile = new FileStream("W.dat", FileMode.Create);
             BinaryFormatter wbf = new BinaryFormatter();
+
+            //序列化窗口最后的x,y位置值
+            FileStream pfile = new FileStream("P.dat", FileMode.Create);
+            BinaryFormatter pbf = new BinaryFormatter();
+            Position position = new Position();
+            position.Left = this.Left;
+            position.Top = this.Top;
 
             try
             {
                 bf.Serialize(fs, gf);
                 wbf.Serialize(webfile, wl);
+                pbf.Serialize(pfile, position);
+
             }
             catch
             {
@@ -160,6 +177,7 @@ namespace fileBower
             {
                 fs.Close();
                 webfile.Close();
+                pfile.Close();
             }
 
 

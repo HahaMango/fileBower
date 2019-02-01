@@ -26,6 +26,7 @@ namespace fileBower
             this.webList = webList;
             this.fatherFrame = frame;
             InitializeComponent();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -39,6 +40,8 @@ namespace fileBower
             {
                 webList.saveWeb(webname.Text,webaddr.Text);
                 fatherFrame.Visibility = Visibility.Hidden;
+                webname.Text = "";
+                webaddr.Text = "";
             }
         }
     }

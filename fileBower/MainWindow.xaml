@@ -23,25 +23,21 @@
             <Storyboard x:Key="switchin">
                 <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="listboxWeb">
                     <EasingThicknessKeyFrame KeyTime="0" Value="-270,0,0,0"/>
-                    <EasingThicknessKeyFrame KeyTime="0:0:0.56" Value="-20,0,0,0"/>
-                    <EasingThicknessKeyFrame KeyTime="0:0:0.7" Value="0"/>
+                    <EasingThicknessKeyFrame KeyTime="0:0:0.2" Value="0"/>
                 </ThicknessAnimationUsingKeyFrames>
                 <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="listbox1">
                     <EasingThicknessKeyFrame KeyTime="0" Value="0"/>
-                    <EasingThicknessKeyFrame KeyTime="0:0:0.56" Value="250,0,0,0"/>
-                    <EasingThicknessKeyFrame KeyTime="0:0:0.7" Value="270,0,0,0"/>
+                    <EasingThicknessKeyFrame KeyTime="0:0:0.2" Value="270,0,0,0"/>
                 </ThicknessAnimationUsingKeyFrames>
             </Storyboard>
             <Storyboard x:Key="switchout">
                 <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="listbox1">
                     <EasingThicknessKeyFrame KeyTime="0" Value="270,0,0,0"/>
-                    <EasingThicknessKeyFrame KeyTime="0:0:0.6" Value="20,0,0,0"/>
-                    <EasingThicknessKeyFrame KeyTime="0:0:0.7" Value="0"/>
+                    <EasingThicknessKeyFrame KeyTime="0:0:0.2" Value="0"/>
                 </ThicknessAnimationUsingKeyFrames>
                 <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="listboxWeb">
                     <EasingThicknessKeyFrame KeyTime="0" Value="0"/>
-                    <EasingThicknessKeyFrame KeyTime="0:0:0.6" Value="-250,0,0,0"/>
-                    <EasingThicknessKeyFrame KeyTime="0:0:0.7" Value="-270,0,0,0"/>
+                    <EasingThicknessKeyFrame KeyTime="0:0:0.2" Value="-270,0,0,0"/>
                 </ThicknessAnimationUsingKeyFrames>
             </Storyboard>
         </ResourceDictionary>
@@ -110,7 +106,7 @@
             <Button Content="编辑" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="46" Click="Button_Click_1" Style="{StaticResource MyButton}" Height="23" Foreground="White"/>
             <Frame Name="webframe" Height="204" Width="auto" Visibility="Hidden"/>
         </Grid>
-        <CheckBox Name="switchbutton" Content="" HorizontalAlignment="Left" Height="35" Margin="236.1,207.333,0,0" Style="{DynamicResource switchButton}" VerticalAlignment="Top" Width="35" Click="switchbutton_Click"/>
+        <CheckBox Name="switchbutton" Content="" HorizontalAlignment="Left" Height="35" Margin="236.1,207.333,0,0" Style="{StaticResource switchButton}" VerticalAlignment="Top" Width="35" Click="switchbutton_Click"/>
 
     </Grid>
 </Window>
