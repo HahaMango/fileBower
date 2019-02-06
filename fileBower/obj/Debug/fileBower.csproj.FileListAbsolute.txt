@@ -33,3 +33,4 @@ D:\Work\C#Work\fileBower\fileBower\obj\Debug\addsite.baml
 D:\Work\C#Work\fileBower\fileBower\bin\Debug\BaseControl.dll
 D:\Work\C#Work\fileBower\fileBower\bin\Debug\BaseControl.pdb
 D:\Work\C#Work\fileBower\fileBower\obj\Debug\fileBower.csproj.CopyComplete
+D:\Work\C#Work\fileBower\fileBower\obj\Debug\fileBower.csprojAssemblyReference.cache

@@ -303,9 +303,21 @@
                                 <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-360"/>
                             </DoubleAnimationUsingKeyFrames>
                         </Storyboard>
+                        <Storyboard x:Key="OnMouseEnter1">
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipse">
+                                <EasingColorKeyFrame KeyTime="0" Value="#FFFFFA56"/>
+                                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FFA5A000"/>
+                            </ColorAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="OnMouseLeave1">
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="ellipse">
+                                <EasingColorKeyFrame KeyTime="0" Value="#FFA5A000"/>
+                                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FFFFFA56"/>
+                            </ColorAnimationUsingKeyFrames>
+                        </Storyboard>
                     </ControlTemplate.Resources>
-                    <Grid>
-                        <Ellipse Fill="#FFFFFA56" Stroke="#FF292929" StrokeThickness="4"/>
+                    <Grid Name="switchgrid">
+                        <Ellipse x:Name="ellipse" Fill="#FFFFFA56" Stroke="#FF292929" StrokeThickness="4"/>
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="0,9.76,0,0"/>
                         <Rectangle x:Name="rectangle" Margin="8" Stroke="{x:Null}" RenderTransformOrigin="0.5,0.5">
                             <Rectangle.RenderTransform>
@@ -322,6 +334,12 @@
                         </Rectangle>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <EventTrigger RoutedEvent="UIElement.MouseLeave" SourceName="switchgrid">
+                            <BeginStoryboard x:Name="OnMouseLeave1_BeginStoryboard" Storyboard="{StaticResource OnMouseLeave1}"/>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="UIElement.MouseEnter" SourceName="switchgrid">
+                            <BeginStoryboard x:Name="OnMouseEnter1_BeginStoryboard" Storyboard="{StaticResource OnMouseEnter1}"/>
+                        </EventTrigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Trigger.ExitActions>
                                 <BeginStoryboard x:Name="switchback_BeginStoryboard" Storyboard="{StaticResource switchback}"/>
