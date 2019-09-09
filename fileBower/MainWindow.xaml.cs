@@ -30,9 +30,10 @@ namespace fileBower
 
             ShowInTaskbar = false;
             this.Topmost = true;
+            this.ResizeMode = ResizeMode.NoResize;
 
-            winHide wh = new winHide(this);
-            wh.start();
+            WinHide wh = new WinHide(this);
+            wh.Start();
             this.MouseLeftButtonDown += MainWindow_MouseLeftButtonDown;
 
             gf = new FileList();
