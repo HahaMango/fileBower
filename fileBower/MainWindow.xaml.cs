@@ -111,9 +111,9 @@ namespace fileBower
             Position position = null;
             try
             {
-                fs = new FileStream("C.dat", FileMode.Open);
-                webfile = new FileStream("W.dat", FileMode.Open);
-                positionfile = new FileStream("P.dat", FileMode.Open);
+                fs = new FileStream("file.dat", FileMode.Open);
+                webfile = new FileStream("website.dat", FileMode.Open);
+                positionfile = new FileStream("position.dat", FileMode.Open);
                 BinaryFormatter bf = new BinaryFormatter();
                 BinaryFormatter wbf = new BinaryFormatter();
                 BinaryFormatter pbf = new BinaryFormatter();           
@@ -149,15 +149,15 @@ namespace fileBower
         private void Win_closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             //序列化文件数据
-            FileStream fs = new FileStream("C.dat", FileMode.Create);
+            FileStream fs = new FileStream("file.dat", FileMode.Create);
             BinaryFormatter bf = new BinaryFormatter();
 
             //序列化网站数据
-            FileStream webfile = new FileStream("W.dat", FileMode.Create);
+            FileStream webfile = new FileStream("website.dat", FileMode.Create);
             BinaryFormatter wbf = new BinaryFormatter();
 
             //序列化窗口最后的x,y位置值
-            FileStream pfile = new FileStream("P.dat", FileMode.Create);
+            FileStream pfile = new FileStream("position.dat", FileMode.Create);
             BinaryFormatter pbf = new BinaryFormatter();
             Position position = new Position();
             position.Left = this.Left;

@@ -20,13 +20,13 @@ namespace fileBower
 
         private void Win_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            if (this._win.Left == 0)
+            if (this._win.Left <= 0)
             {
-                this._win.Left = -this._win.Width + 13;
+                this._win.Left = -this._win.Width + 23;
             }
-            if(this._win.Top == 0)
+            if(this._win.Top <= 0)
             {
-                this._win.Top = -this._win.Height + 5;
+                this._win.Top = -this._win.Height + 15;
             }
         }
 
@@ -34,10 +34,10 @@ namespace fileBower
         {
             if (this._win.Left < 0)
             {
-                this._win.Left = 0;
+                this._win.Left = -10;
             }if(this._win.Top < 0)
             {
-                this._win.Top = 0;
+                this._win.Top = -10;
             }
         }
 
@@ -46,13 +46,13 @@ namespace fileBower
             double left = this._win.Left;
             double right = this._win.Left + this._win.Width;
             double top = this._win.Top;
-            if (left < 0)
+            if (left <= 0)
             {
-                this._win.Left = -this._win.Width + 13;
+                this._win.Left = -this._win.Width + 23;
             }
-            if(top < 0)
+            if(top <= 0)
             {
-                this._win.Top = -this._win.Top + 5;
+                this._win.Top = -this._win.Top + 15;
             }
         }
     }

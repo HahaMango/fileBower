@@ -68,7 +68,7 @@
     <Compile Include="Data\Visibilable.cs" />
     <Compile Include="Data\WebList.cs" />
     <Compile Include="Data\WebSite.cs" />
-    <Compile Include="winHide.cs" />
+    <Compile Include="WinHide.cs" />
     <Page Include="Addsite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

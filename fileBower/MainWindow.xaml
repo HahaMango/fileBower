@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:fileBower.Data" x:Class="fileBower.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="452.257" Width="271.1" WindowStyle="None" AllowsTransparency="True" Loaded="Win_loaded" Closing="Win_closing" Background="{x:Null}">
+        Title="MainWindow" Height="475.257" Width="290.1" WindowStyle="None" AllowsTransparency="True" Loaded="Win_loaded" Closing="Win_closing" Background="{x:Null}" BorderThickness="10">
+    <Window.Effect>
+        <DropShadowEffect BlurRadius="10" Color="#FF858484" Direction="90" ShadowDepth="3"/>
+    </Window.Effect>
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
