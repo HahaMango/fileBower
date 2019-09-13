@@ -1,27 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using fileBower.Data;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace fileBower
 {
     /// <summary>
     /// addsite.xaml 的交互逻辑
     /// </summary>
-    public partial class addsite : Page
+    public partial class Addsite : Page
     {
         private Frame fatherFrame;
         private WebList webList;
-        public addsite(Frame frame,WebList webList)
+        public Addsite(Frame frame,WebList webList)
         {
             this.webList = webList;
             this.fatherFrame = frame;
@@ -34,11 +24,11 @@ namespace fileBower
             fatherFrame.Visibility = Visibility.Hidden;
         }
 
-        private void add_Click(object sender, RoutedEventArgs e)
+        private void Add_Click(object sender, RoutedEventArgs e)
         {
             if (webname.Text != "" && webaddr.Text != "")
             {
-                webList.saveWeb(webname.Text,webaddr.Text);
+                webList.SaveWeb(webname.Text,webaddr.Text);
                 fatherFrame.Visibility = Visibility.Hidden;
                 webname.Text = "";
                 webaddr.Text = "";

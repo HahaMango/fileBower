@@ -4,10 +4,9 @@ using System.Windows.Input;
 using System.Windows.Forms;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.ComponentModel;
+using fileBower.Data;
 
 namespace fileBower
 {
@@ -16,34 +15,36 @@ namespace fileBower
     /// </summary>
     public partial class MainWindow : Window
     {
-        FileList gf;
-        WebList wl;
-        Collection<FileName> buffList = null;
-        Collection<Website> webbufflist = null;
-        Visibilable visibilable;
+        private FileList _fileList;
+        private WebList _webList;
+        private Collection<FileName> _fileNameList = null;
+        private Collection<Website> _webbufflist = null;
+        private Visibilable _visibilable;
+
         public MainWindow()
         {
             InitializeComponent();        
             
             ProCount();
-            visibilable = (Visibilable)this.FindResource("visi");          
+            _visibilable = (Visibilable)this.FindResource("visi");          
 
             ShowInTaskbar = false;
             this.Topmost = true;
             this.ResizeMode = ResizeMode.NoResize;
 
             WinHide wh = new WinHide(this);
-            wh.Start();
+            wh.BindEvent();
+
             this.MouseLeftButtonDown += MainWindow_MouseLeftButtonDown;
 
-            gf = new FileList();
-            wl = new WebList();
+            _fileList = new FileList();
+            _webList = new WebList();
 
-            buffList = gf.GetList();
-            webbufflist = wl.getWeblist();
-            listbox1.ItemsSource = buffList;
+            _fileNameList = _fileList.GetList();
+            _webbufflist = _webList.GetWeblist();
 
-            listboxWeb.ItemsSource = webbufflist;
+            listbox1.ItemsSource = _fileNameList;
+            listboxWeb.ItemsSource = _webbufflist;
         }
 
         //鼠标按住上方拖动事件
@@ -69,7 +70,7 @@ namespace fileBower
                 if (fd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     string[] s = fd.SelectedPath.Split('\\');
-                    gf.setFile(fd.SelectedPath, s[s.Length - 1]);
+                    _fileList.SetFile(fd.SelectedPath, s[s.Length - 1]);
                 }
             }
             if (selectButton.Content.ToString() == "添加网址")
@@ -116,8 +117,8 @@ namespace fileBower
                 BinaryFormatter bf = new BinaryFormatter();
                 BinaryFormatter wbf = new BinaryFormatter();
                 BinaryFormatter pbf = new BinaryFormatter();           
-                gf = (FileList)bf.Deserialize(fs);
-                wl = (WebList)wbf.Deserialize(webfile);
+                _fileList = (FileList)bf.Deserialize(fs);
+                _webList = (WebList)wbf.Deserialize(webfile);
                 position = (Position)pbf.Deserialize(positionfile);                       
                 fs.Close();
                 webfile.Close();
@@ -128,13 +129,13 @@ namespace fileBower
             }
             finally
             {
-                buffList = gf.GetList();
-                listbox1.ItemsSource = buffList;
+                _fileNameList = _fileList.GetList();
+                listbox1.ItemsSource = _fileNameList;
 
-                webbufflist = wl.getWeblist();
-                listboxWeb.ItemsSource = webbufflist;
+                _webbufflist = _webList.GetWeblist();
+                listboxWeb.ItemsSource = _webbufflist;
 
-                webframe.Content = new addsite(webframe, wl);
+                webframe.Content = new Addsite(webframe, _webList);
             }
             if(position == null)
             {
@@ -164,8 +165,8 @@ namespace fileBower
 
             try
             {
-                bf.Serialize(fs, gf);
-                wbf.Serialize(webfile, wl);
+                bf.Serialize(fs, _fileList);
+                wbf.Serialize(webfile, _webList);
                 pbf.Serialize(pfile, position);
 
             }
@@ -180,9 +181,6 @@ namespace fileBower
                 webfile.Close();
                 pfile.Close();
             }
-
-
-
         }
 
         //打开资源管理器按钮事件
@@ -202,22 +200,22 @@ namespace fileBower
             if (switchbutton.IsChecked == false)
             {
                 string filename = textBlock.Text;
-                foreach (FileName file in buffList)
+                foreach (FileName file in _fileNameList)
                 {
                     if (file.Filename == filename)
                     {
-                        buffList.Remove(file);
+                        _fileNameList.Remove(file);
                         break;
                     }
                 }
             }else if(switchbutton.IsChecked == true)
             {
                 string webaddr = textBlock.Text;
-                foreach (Website website in webbufflist)
+                foreach (Website website in _webbufflist)
                 {
                     if(website.Webaddr == webaddr)
                     {
-                        webbufflist.Remove(website);
+                        _webbufflist.Remove(website);
                         break;
                     }
                 }
@@ -247,17 +245,17 @@ namespace fileBower
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if (visibilable.Vi == "Visible")
+            if (_visibilable.Vi == "Visible")
             {
-                visibilable.Vi = "Hidden";
-                visibilable.StackState = "true";
-                visibilable.ItemColor = "white";
+                _visibilable.Vi = "Hidden";
+                _visibilable.StackState = "true";
+                _visibilable.ItemColor = "white";
             }
             else
             {
-                visibilable.Vi = "Visible";
-                visibilable.StackState = "false";
-                visibilable.ItemColor = "gray";
+                _visibilable.Vi = "Visible";
+                _visibilable.StackState = "false";
+                _visibilable.ItemColor = "gray";
             }                
         }
 

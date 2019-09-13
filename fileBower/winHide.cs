@@ -1,62 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 
 namespace fileBower
 {
-    class WinHide
+    public class WinHide
     {
-        private double Sx = SystemParameters.PrimaryScreenWidth;
-        private double Sy = SystemParameters.PrimaryScreenHeight;
-        private Window win;
+        private readonly double _screenWidth = SystemParameters.PrimaryScreenWidth;
+        private readonly double _screenHeight = SystemParameters.PrimaryScreenHeight;
+        private readonly Window _win;
         public WinHide(Window win)
         {
-            this.win = win;
+            this._win = win;
         }
-        public void Start()
+        public void BindEvent()
         {
-            this.win.MouseLeftButtonUp += Win_MouseLeftButtonUp;
-            this.win.MouseEnter += Win_MouseEnter;
-            this.win.MouseLeave += Win_MouseLeave;
+            this._win.MouseLeftButtonUp += Win_MouseLeftButtonUp;
+            this._win.MouseEnter += Win_MouseEnter;
+            this._win.MouseLeave += Win_MouseLeave;
         }
 
         private void Win_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            if (this.win.Left == 0)
+            if (this._win.Left == 0)
             {
-                this.win.Left = -this.win.Width + 13;
+                this._win.Left = -this._win.Width + 13;
             }
-            if(this.win.Top == 0)
+            if(this._win.Top == 0)
             {
-                this.win.Top = -this.win.Height + 5;
+                this._win.Top = -this._win.Height + 5;
             }
         }
 
         private void Win_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            if (this.win.Left < 0)
+            if (this._win.Left < 0)
             {
-                this.win.Left = 0;
-            }if(this.win.Top < 0)
+                this._win.Left = 0;
+            }if(this._win.Top < 0)
             {
-                this.win.Top = 0;
+                this._win.Top = 0;
             }
         }
 
         private void Win_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            double left = this.win.Left;
-            double right = this.win.Left + this.win.Width;
-            double top = this.win.Top;
+            double left = this._win.Left;
+            double right = this._win.Left + this._win.Width;
+            double top = this._win.Top;
             if (left < 0)
             {
-                this.win.Left = -this.win.Width + 13;
+                this._win.Left = -this._win.Width + 13;
             }
             if(top < 0)
             {
-                this.win.Top = -this.win.Top + 5;
+                this._win.Top = -this._win.Top + 5;
             }
         }
     }

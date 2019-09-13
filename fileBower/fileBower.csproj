@@ -59,12 +59,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="addsite.xaml.cs">
-      <DependentUpon>addsite.xaml</DependentUpon>
+    <Compile Include="Addsite.xaml.cs">
+      <DependentUpon>Addsite.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data.cs" />
+    <Compile Include="Data\FileList.cs" />
+    <Compile Include="Data\FileName.cs" />
+    <Compile Include="Data\Position.cs" />
+    <Compile Include="Data\Visibilable.cs" />
+    <Compile Include="Data\WebList.cs" />
+    <Compile Include="Data\WebSite.cs" />
     <Compile Include="winHide.cs" />
-    <Page Include="addsite.xaml">
+    <Page Include="Addsite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
