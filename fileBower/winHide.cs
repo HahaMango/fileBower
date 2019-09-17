@@ -52,7 +52,7 @@ namespace fileBower
             }
             if(top <= 0)
             {
-                this._win.Top = -this._win.Top + 15;
+                this._win.Top = -this._win.Height + 15;
             }
         }
     }
